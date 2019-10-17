@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+
+tcpdump=$(/usr/sbin/tcpdump -nv -i $1 -s 1500 -c 1 ether host 01:00:0c:cc:cc:cc and ether[16:4] = 0x0300000C and ether[20:2] == 0x2000)
+echo `hostname`,$1,`echo $tcpdump | sed -En "/(Device|Port)-ID/s/.* '(.*)'$/\1/p"`
+IFS=','
+echo $result
